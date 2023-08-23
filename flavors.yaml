@@ -1,0 +1,13 @@
+
+flavorizr:
+  flavors:
+    version_one:
+      name: Simpsons Character Viewer
+      package: com.sample.simpsonsviewer
+      variables:
+        DATA_API: http://api.duckduckgo.com/?q=simpsons+characters&format=json
+    version_two:
+      name: The Wire Character Viewer
+      package: com.sample.wireviewer
+      variables:
+        DATA_API: http://api.duckduckgo.com/?q=the+wire+characters&format=json

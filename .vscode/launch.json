@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flutter: Run Flavor - Variant 1",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "variantone"
+                // "-t",
+                // "lib/main_versionOne.dart"
+            ],
+        },
+        {
+            "name": "Flutter: Run Flavor - Variant 2",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "varianttwo"
+                // "-t",
+                // "lib/main_versionTwo.dart"
+            ],
+        }
+    ]
+}
