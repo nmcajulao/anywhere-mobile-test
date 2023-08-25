@@ -21,7 +21,7 @@ class CharacterListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) {
-        if (state is CharacterLoading) {
+        if (state is CharacterLoading || state is CharacterInitial) {
           return const AppLoaderWidget();
         } else if (state is CharacterError) {
           return const AppErrorWidget();
@@ -55,6 +55,7 @@ Widget _buildDoneWidget({
         for (CharacterEntity instance in (state.characters ?? []))
           GestureDetector(
             onTap: () {
+              // * fires an event to the character details page where the passed character instance is set
               context.read<CharacterDetailsBloc>().add(
                     SetCharacterDetails(
                       characterEntity: instance,
@@ -63,6 +64,7 @@ Widget _buildDoneWidget({
 
               // * Redirects the user if the app is launched on a mobile layout
               if (isUsingMobileLayout) {
+                //
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const MobileCharacterDetailsScreen(),
                 ));

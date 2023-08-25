@@ -1,2 +1,4 @@
-const String baseURL = "http://api.duckduckgo.com/";
-const String imagebaseURL = "https://duckduckgo.com";
+class AppConstants {
+  static String baseURL = "http://api.duckduckgo.com/";
+  static String imagebaseURL = "https://duckduckgo.com";
+}

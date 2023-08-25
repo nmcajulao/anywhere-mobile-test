@@ -1,6 +1,7 @@
 import 'package:anywhere_mobile_test/core/resources/data_state.dart';
 import 'package:anywhere_mobile_test/core/usecase/usecase.dart';
 import 'package:anywhere_mobile_test/features/characters/domain/repository/character_repository.dart';
+import 'package:anywhere_mobile_test/flavors.dart';
 
 import '../entities/character.dart';
 
@@ -12,6 +13,6 @@ class GetCharacterUseCase
 
   @override
   Future<DataState<List<CharacterEntity>>> call({void params}) {
-    return _characterRepository.getCharacters();
+    return _characterRepository.getCharacters(F.getCharacterUrl);
   }
 }

@@ -7,6 +7,8 @@ sealed class CharacterDetailsState extends Equatable {
   List<Object> get props => [];
 }
 
+final class CharacterDetailsInitial extends CharacterDetailsState {}
+
 final class CharacterDetailsLoading extends CharacterDetailsState {}
 
 final class CharacterDetailsDone extends CharacterDetailsState {

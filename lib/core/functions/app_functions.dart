@@ -7,7 +7,9 @@ class AppFunctions {
   static Future<DeviceType> getDeviceType(
       {required BuildContext context}) async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+
     if (Theme.of(context).platform == TargetPlatform.iOS) {
+      // * iOS has direct info to extract whether the user is on table or phone.
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
       if (iosInfo.model.contains('iPad')) {
         return DeviceType.tablet;
@@ -15,20 +17,15 @@ class AppFunctions {
         return DeviceType.phone;
       }
     } else if (Theme.of(context).platform == TargetPlatform.android) {
-      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-      double screenWidth = MediaQuery.of(context).size.width;
-      double screenHeight = MediaQuery.of(context).size.height;
-      double screenDensity = MediaQuery.of(context).devicePixelRatio;
-      DeviceType deviceType = DeviceType.unknown;
+      // * this is the simplest implementation i could find to determin the device for Android.
+      var shortestSide = MediaQuery.of(context).size.shortestSide;
+      var useMobileLayout = shortestSide < 600;
 
-      // A simple rule to determine tablet based on screen size and density
-      if (screenWidth > 600 && screenDensity > 2.0) {
-        deviceType = DeviceType.tablet;
+      if (!useMobileLayout) {
+        return DeviceType.tablet;
       } else {
-        deviceType = DeviceType.phone;
+        return DeviceType.phone;
       }
-
-      return deviceType;
     }
     return DeviceType.unknown;
   }

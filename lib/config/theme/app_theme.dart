@@ -11,6 +11,7 @@ class AppTheme {
   }
 }
 
+// * creates a material color based on the provided custom Color, this is use to unrestrisct primaryswatch Colors from theming
 MaterialColor _createMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};

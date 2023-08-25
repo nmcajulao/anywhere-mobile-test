@@ -1,7 +1,10 @@
 import 'package:anywhere_mobile_test/config/colors/app_colors.dart';
+import 'package:anywhere_mobile_test/core/functions/app_functions.dart';
 import 'package:anywhere_mobile_test/core/resources/app_package_info.dart';
+import 'package:anywhere_mobile_test/core/resources/device_type.dart';
+import 'package:anywhere_mobile_test/core/widgets/error_widget.dart';
 import 'package:anywhere_mobile_test/features/characters/presentation/widgets/details/character_details_main_widget.dart';
-import 'package:anywhere_mobile_test/features/characters/presentation/widgets/list/character_main_widget.dart';
+import 'package:anywhere_mobile_test/features/characters/presentation/widgets/list/character_list_main_widget.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -26,32 +29,45 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    var useMobileLayout = shortestSide < 600;
-
     return Scaffold(
       appBar: _getAppBar(context),
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
-        child: (useMobileLayout)
-            ? CharacterMainWidget(
-                animSearchBarTextController: _animSearchBarTextController,
-              )
-            : Row(
-                children: [
-                  Expanded(
-                    child: CharacterMainWidget(
-                      animSearchBarTextController: _animSearchBarTextController,
-                      isUsingMobileLayout: false,
+        child: FutureBuilder(
+          future: AppFunctions.getDeviceType(context: context),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data == DeviceType.phone) {
+                return CharacterListMainWidget(
+                  animSearchBarTextController: _animSearchBarTextController,
+                );
+              } else if (snapshot.data == DeviceType.tablet) {
+                return Row(
+                  children: [
+                    Expanded(
+                      child: CharacterListMainWidget(
+                        animSearchBarTextController:
+                            _animSearchBarTextController,
+                        isUsingMobileLayout: false,
+                      ),
                     ),
-                  ),
-                  const Expanded(
-                    child: CharacterDetailsMainWidget(
-                      isUsingMobileLayout: false,
+                    const Expanded(
+                      child: CharacterDetailsMainWidget(
+                        isUsingMobileLayout: false,
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                );
+              } else {
+                return const AppErrorWidget();
+              }
+            } else if (snapshot.hasError) {
+              return const AppErrorWidget();
+            } else {
+              return const AppErrorWidget();
+            }
+          },
+        ),
       ),
     );
   }

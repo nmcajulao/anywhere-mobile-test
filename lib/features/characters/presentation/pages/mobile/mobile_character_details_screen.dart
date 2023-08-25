@@ -21,7 +21,9 @@ class _MobileCharacterDetailsScreenState
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: CharacterDetailsMainWidget(),
+      body: SafeArea(
+        child: CharacterDetailsMainWidget(),
+      ),
     );
   }
 }

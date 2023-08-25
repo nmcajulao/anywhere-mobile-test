@@ -13,6 +13,8 @@ sealed class CharacterState extends Equatable {
   List<Object> get props => [];
 }
 
+final class CharacterInitial extends CharacterState {}
+
 final class CharacterLoading extends CharacterState {}
 
 final class CharacterDone extends CharacterState {

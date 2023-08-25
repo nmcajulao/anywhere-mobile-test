@@ -31,13 +31,13 @@ android {
     flavorDimensions "flavor-type"
 
     productFlavors {
-        versionOne {
+        simpsons {
             dimension "flavor-type"
             applicationId "com.sample.simpsonsviewer"
             resValue "string", "app_name", "Simpsons Character Viewer"
             resValue "string", "data_api", "http://api.duckduckgo.com/?q=simpsons+characters&format=json"
         }
-        versionTwo {
+        wire {
             dimension "flavor-type"
             applicationId "com.sample.wireviewer"
             resValue "string", "app_name", "The Wire Character Viewer"

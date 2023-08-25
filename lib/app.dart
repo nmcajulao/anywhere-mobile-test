@@ -32,10 +32,11 @@ class _AppState extends State<App> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => sl.get<CharacterBloc>()..add(GetCharacters()),
+          create: (context) =>
+              serviceLocator.get<CharacterBloc>()..add(GetCharacters()),
         ),
         BlocProvider(
-          create: (context) => sl.get<CharacterDetailsBloc>(),
+          create: (context) => serviceLocator.get<CharacterDetailsBloc>(),
         ),
       ],
       child: MaterialApp(

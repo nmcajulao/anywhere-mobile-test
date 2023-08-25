@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'character_animated_search_widget.dart';
 import 'character_list_widget.dart';
 
-class CharacterMainWidget extends StatelessWidget {
+class CharacterListMainWidget extends StatelessWidget {
   final TextEditingController animSearchBarTextController;
   final bool isUsingMobileLayout;
 
-  const CharacterMainWidget({
+  const CharacterListMainWidget({
     required this.animSearchBarTextController,
     this.isUsingMobileLayout = true,
     super.key,

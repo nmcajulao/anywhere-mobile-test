@@ -34,7 +34,8 @@ class _CharacterDetailsMainWidgetState
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterDetailsBloc, CharacterDetailsState>(
       builder: (context, state) {
-        if (state is CharacterDetailsLoading) {
+        if (state is CharacterDetailsLoading ||
+            state is CharacterDetailsInitial) {
           return const AppLoaderWidget();
         } else if (state is CharacterDetailsError) {
           return const AppErrorWidget();
@@ -105,7 +106,8 @@ Widget _getDoneWidget({
                 offset: const Offset(5, 5), // Default: Offset(2, 2)
                 sigma: 7,
                 child: CachedNetworkImage(
-                  imageUrl: imagebaseURL + state.characterEntity.image,
+                  imageUrl:
+                      AppConstants.imagebaseURL + state.characterEntity.image,
                   height: MediaQuery.of(context).size.height * 0.40,
                   fit: BoxFit.cover,
                   filterQuality: FilterQuality.high,

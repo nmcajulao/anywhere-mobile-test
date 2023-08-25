@@ -1,3 +1,4 @@
+import 'package:anywhere_mobile_test/core/resources/app_package_info.dart';
 import 'package:anywhere_mobile_test/features/characters/data/data_sources/remote/character_api_service.dart';
 import 'package:anywhere_mobile_test/features/characters/data/repository/character_repository_impl.dart';
 import 'package:anywhere_mobile_test/features/characters/domain/repository/character_repository.dart';
@@ -8,43 +9,50 @@ import 'package:get_it/get_it.dart';
 
 import 'features/characters/presentation/bloc/character_list/character_bloc.dart';
 
-final sl = GetIt.instance;
+final serviceLocator = GetIt.instance;
 
 Future<void> initializeDependencies() async {
   // * Dio
-  sl.registerSingleton<Dio>(
+  serviceLocator.registerSingleton<Dio>(
     Dio(),
   );
 
   // * Dependencies
-  sl.registerSingleton<CharacterAPIService>(
+  serviceLocator.registerSingleton<CharacterAPIService>(
     CharacterAPIService(
-      sl(),
+      serviceLocator(),
     ),
   );
 
   // * Repositories
-  sl.registerSingleton<CharacterRepository>(
+  serviceLocator.registerSingleton<CharacterRepository>(
     CharacterRepositoryImpl(
-      sl(),
+      characterAPIService: serviceLocator(),
     ),
   );
 
   // * Blocs
-  sl.registerFactory<CharacterBloc>(
+  serviceLocator.registerFactory<CharacterBloc>(
     () => CharacterBloc(
-      sl(),
+      serviceLocator(),
     ),
   );
 
-  sl.registerFactory<CharacterDetailsBloc>(
+  serviceLocator.registerFactory<CharacterDetailsBloc>(
     () => CharacterDetailsBloc(),
   );
 
   // * UseCases
-  sl.registerSingleton<GetCharacterUseCase>(
+  serviceLocator.registerSingleton<GetCharacterUseCase>(
     GetCharacterUseCase(
-      sl(),
+      serviceLocator(),
     ),
   );
+
+  // * Resources
+  serviceLocator.registerSingleton<AppPackageInfo>(
+    AppPackageInfo(),
+  );
+
+  await AppPackageInfo.init();
 }

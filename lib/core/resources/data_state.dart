@@ -10,10 +10,12 @@ abstract class DataState<T> {
   });
 }
 
+// * handles successful reposiory result and store it in a class [data] parameter
 class DataSuccess<T> extends DataState<T> {
   const DataSuccess(T data) : super(data: data);
 }
 
+// * handles unsuccessful reposiory result and store it in a class [error] parameter
 class DataFailed<T> extends DataState<T> {
   const DataFailed(DioException error) : super(error: error);
 }

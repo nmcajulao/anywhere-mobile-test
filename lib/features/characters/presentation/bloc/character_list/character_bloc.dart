@@ -11,21 +11,23 @@ part 'character_event.dart';
 part 'character_state.dart';
 
 class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
-  List<CharacterEntity> _characterEntityOriginal = [];
+  List<CharacterEntity> characterEntityOriginal = [];
 
   final GetCharacterUseCase _getCharacterUseCase;
 
-  CharacterBloc(this._getCharacterUseCase) : super(CharacterLoading()) {
+  CharacterBloc(this._getCharacterUseCase) : super(CharacterInitial()) {
     on<GetCharacters>(_onGetCharacters);
     on<FilterCharacters>(_onFilterCharacters);
   }
 
   void _onGetCharacters(
       GetCharacters event, Emitter<CharacterState> emit) async {
+    emit(CharacterLoading());
+
     final dataState = await _getCharacterUseCase();
 
-    if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
-      _characterEntityOriginal = dataState.data!;
+    if (dataState is DataSuccess) {
+      characterEntityOriginal = dataState.data ?? [];
 
       emit(
         CharacterDone(dataState.data!),
@@ -45,33 +47,18 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     debugPrint("HEEEEEEEEERERE");
     debugPrint(state.runtimeType.toString());
 
-    if (state is CharacterDone) {
-      debugPrint(
-          "_characterEntityOriginal length: ${_characterEntityOriginal.length}");
-      debugPrint("filter: ${event.filter}");
-      debugPrint([..._characterEntityOriginal]
-          .where(
-            (element) => element.title
-                .toUpperCase()
-                .contains(event.filter.toUpperCase()),
-          )
-          .toList()
-          .length
-          .toString());
+    emit(CharacterLoading());
 
-      emit(CharacterLoading());
-
-      emit(
-        CharacterDone(
-          [..._characterEntityOriginal]
-              .where(
-                (element) => element.title
-                    .toUpperCase()
-                    .contains(event.filter.toUpperCase()),
-              )
-              .toList(),
-        ),
-      );
-    }
+    emit(
+      CharacterDone(
+        [...characterEntityOriginal]
+            .where(
+              (element) => element.title
+                  .toUpperCase()
+                  .contains(event.filter.toUpperCase()),
+            )
+            .toList(),
+      ),
+    );
   }
 }

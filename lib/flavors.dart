@@ -1,6 +1,6 @@
 enum Flavor {
-  versionone,
-  versiontwo,
+  simpsons,
+  theWire,
 }
 
 class F {
@@ -10,9 +10,9 @@ class F {
 
   static String get title {
     switch (appFlavor) {
-      case Flavor.versionone:
+      case Flavor.simpsons:
         return 'Simpsons Character Viewer';
-      case Flavor.versiontwo:
+      case Flavor.theWire:
         return 'The Wire Character Viewer';
       default:
         return 'title';
@@ -21,9 +21,20 @@ class F {
 
   static String get getCharacterUrl {
     switch (appFlavor) {
-      case Flavor.versionone:
+      case Flavor.simpsons:
         return "http://api.duckduckgo.com/?q=simpsons+characters&format=json";
-      case Flavor.versiontwo:
+      case Flavor.theWire:
+        return "http://api.duckduckgo.com/?q=the+wire+characters&format=json";
+      default:
+        throw Exception("Unknown Flavor");
+    }
+  }
+
+  static String getCharacterUrlFlavorSpecified(Flavor flavor) {
+    switch (flavor) {
+      case Flavor.simpsons:
+        return "http://api.duckduckgo.com/?q=simpsons+characters&format=json";
+      case Flavor.theWire:
         return "http://api.duckduckgo.com/?q=the+wire+characters&format=json";
       default:
         throw Exception("Unknown Flavor");

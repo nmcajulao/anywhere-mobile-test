@@ -8,15 +8,13 @@ part 'character_details_state.dart';
 
 class CharacterDetailsBloc
     extends Bloc<CharacterDetailsEvent, CharacterDetailsState> {
-  CharacterDetailsBloc() : super(CharacterDetailsLoading()) {
+  CharacterDetailsBloc() : super(CharacterDetailsInitial()) {
     on<SetCharacterDetails>(_onSetCharacterDetails);
   }
 
   void _onSetCharacterDetails(
       SetCharacterDetails event, Emitter<CharacterDetailsState> emit) async {
     final state = this.state;
-
-    debugPrint("HEEEEEEERE: ${event.characterEntity.toString()}");
 
     emit(CharacterDetailsLoading());
 
