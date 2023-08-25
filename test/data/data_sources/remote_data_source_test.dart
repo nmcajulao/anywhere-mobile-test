@@ -57,7 +57,7 @@ void main() {
       () async {
         when(
           characterAPIService.getCharacters(
-            flavorURL: F.getCharacterUrlFlavorSpecified(Flavor.theWire),
+            flavorURL: F.getCharacterUrlFlavorSpecified(Flavor.wire),
           ),
         ).thenAnswer(
           (realInvocation) async => HttpResponse(
@@ -72,7 +72,7 @@ void main() {
         );
 
         final result = await characterRepositoryImpl.getCharacters(
-          F.getCharacterUrlFlavorSpecified(Flavor.theWire),
+          F.getCharacterUrlFlavorSpecified(Flavor.wire),
         );
 
         expect(result, isA<DataSuccess<List<CharacterModel>>>());
@@ -87,7 +87,7 @@ void main() {
         () async {
       when(
         characterAPIService.getCharacters(
-          flavorURL: F.getCharacterUrlFlavorSpecified(Flavor.theWire),
+          flavorURL: F.getCharacterUrlFlavorSpecified(Flavor.wire),
         ),
       ).thenAnswer(
         (realInvocation) async => HttpResponse(
@@ -102,7 +102,7 @@ void main() {
 
       //act
       final result = await characterRepositoryImpl
-          .getCharacters(F.getCharacterUrlFlavorSpecified(Flavor.theWire));
+          .getCharacters(F.getCharacterUrlFlavorSpecified(Flavor.wire));
 
       //assert
       expect(result, isA<DataFailed<List<CharacterModel>>>());

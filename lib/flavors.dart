@@ -1,6 +1,6 @@
 enum Flavor {
   simpsons,
-  theWire,
+  wire,
 }
 
 class F {
@@ -12,7 +12,7 @@ class F {
     switch (appFlavor) {
       case Flavor.simpsons:
         return 'Simpsons Character Viewer';
-      case Flavor.theWire:
+      case Flavor.wire:
         return 'The Wire Character Viewer';
       default:
         return 'title';
@@ -23,7 +23,7 @@ class F {
     switch (appFlavor) {
       case Flavor.simpsons:
         return "http://api.duckduckgo.com/?q=simpsons+characters&format=json";
-      case Flavor.theWire:
+      case Flavor.wire:
         return "http://api.duckduckgo.com/?q=the+wire+characters&format=json";
       default:
         throw Exception("Unknown Flavor");
@@ -34,7 +34,7 @@ class F {
     switch (flavor) {
       case Flavor.simpsons:
         return "http://api.duckduckgo.com/?q=simpsons+characters&format=json";
-      case Flavor.theWire:
+      case Flavor.wire:
         return "http://api.duckduckgo.com/?q=the+wire+characters&format=json";
       default:
         throw Exception("Unknown Flavor");

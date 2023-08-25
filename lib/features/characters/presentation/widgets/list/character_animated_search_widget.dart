@@ -32,8 +32,6 @@ class CharacterAnimatedSearchWidget extends StatelessWidget {
                 }); */
             },
             onSubmitted: (value) {
-              debugPrint("SUBMITTED");
-
               context.read<CharacterBloc>().add(
                     FilterCharacters(
                       filter: value,

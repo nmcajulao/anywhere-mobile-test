@@ -47,7 +47,6 @@ class CharacterRepositoryImpl implements CharacterRepository {
         );
       }
     } on DioException catch (e) {
-      debugPrint("DioException: $e");
       return DataFailed(e);
     }
   }

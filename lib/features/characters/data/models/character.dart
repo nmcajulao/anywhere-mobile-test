@@ -46,17 +46,12 @@ class CharacterModel extends CharacterEntity {
   static Future<List<CharacterModel>> fromJsonCustom(String source) async {
     var decoded = json.decode(source);
 
-    // debugPrint("DECODED: $decoded");
-
     List<CharacterModel> value =
         await decoded!["RelatedTopics"].map<CharacterModel>((i) {
       var map = i as Map<String, dynamic>;
-      // debugPrint("INSTANCE: $map");
 
       return CharacterModel.fromMap(map);
     }).toList();
-
-    debugPrint("VALUE: $value");
 
     return value;
   }

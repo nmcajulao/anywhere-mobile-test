@@ -33,7 +33,6 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         CharacterDone(dataState.data!),
       );
     } else if (dataState is DataFailed) {
-      debugPrint("DATA FAILED: ${dataState.error!.message}");
       emit(
         CharacterError(dataState.error!),
       );
@@ -42,11 +41,6 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
 
   void _onFilterCharacters(
       FilterCharacters event, Emitter<CharacterState> emit) async {
-    final state = this.state;
-
-    debugPrint("HEEEEEEEEERERE");
-    debugPrint(state.runtimeType.toString());
-
     emit(CharacterLoading());
 
     emit(

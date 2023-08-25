@@ -20,11 +20,6 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    /* SchedulerBinding.instance.addPostFrameCallback(
-      (timeStamp) {
-        AppFunctions.getDeviceType(context: context);
-      },
-    ); */
   }
 
   @override
@@ -43,27 +38,7 @@ class _AppState extends State<App> {
         title: F.title,
         theme: AppTheme.getThemeData,
         home: _flavorBanner(
-          child: const MainScreen()
-          /* FutureBuilder(
-            future: AppFunctions.getDeviceType(context: context),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                debugPrint("DEVICE TYPE: ${snapshot.data}");
-                if (snapshot.data == DeviceType.phone) {
-                  return const MobileCharacterListScreen();
-                } else if (snapshot.data == DeviceType.tablet) {
-                  return const TabletCharacterScreen();
-                } else {
-                  return const AppErrorWidget();
-                }
-              } else if (snapshot.hasError) {
-                return const AppErrorWidget();
-              } else {
-                return const AppLoaderWidget();
-              }
-            },
-          ) */
-          ,
+          child: const MainScreen(),
           show: kDebugMode,
         ),
       ),

@@ -26,8 +26,6 @@ class CharacterListWidget extends StatelessWidget {
         } else if (state is CharacterError) {
           return const AppErrorWidget();
         } else if (state is CharacterDone) {
-          debugPrint("state.characters length: ${state.characters!.length}");
-
           return _buildDoneWidget(
             state: state,
             context: context,
